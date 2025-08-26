@@ -17,8 +17,14 @@ const Navbar = () => {
 
     const handleMenuClick = (item) => {
         setActive(item);
-        setIsMenuOpen(false); // Close drawer on click
+        setIsMenuOpen(false); // Close drawer on mobile
+
+        const section = document.getElementById(item.toLowerCase());
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
     };
+
 
     return (
         <>
@@ -38,7 +44,7 @@ const Navbar = () => {
                         {menuItems.map((item) => (
                             <li
                                 key={item}
-                                onClick={() => setActive(item)}
+                                onClick={() => handleMenuClick(item)} // use the same function
                                 className={`relative cursor-pointer font-medium transition-colors duration-300 group ${active === item
                                     ? "text-gray-900"
                                     : "text-gray-600 hover:text-blue-600"
@@ -52,6 +58,7 @@ const Navbar = () => {
                             </li>
                         ))}
                     </ul>
+
 
                     {/* Mobile Hamburger Icon */}
                     <div className="md:hidden">
